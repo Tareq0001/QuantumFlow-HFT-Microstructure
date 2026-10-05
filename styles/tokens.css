@@ -1,0 +1,41 @@
+/* ==========================================================================
+   QUANTUMFLOW HFT MICROSTRUCTURE - DESIGN TOKENS
+   Cyber-Emerald Obsidian Standard | Ultra High-Density Financial Terminal
+   ========================================================================== */
+
+:root {
+  --bg-core: #020403;
+  --bg-deep: #050a07;
+  --bg-surface: #08110c;
+  --bg-surface-elevated: #0d1a13;
+  --bg-surface-hover: #12241b;
+
+  /* HFT Color Palette: Bid (Emerald) vs Ask (Coral) */
+  --bid-green: #00ff88;
+  --bid-green-bg: rgba(0, 255, 136, 0.12);
+  --ask-coral: #fb7185;
+  --ask-coral-bg: rgba(251, 113, 133, 0.12);
+
+  --emerald-400: #34d399;
+  --emerald-500: #10b981;
+  --cyan-400: #22d3ee;
+  --cyan-500: #06b6d4;
+  --amber-400: #fbbf24;
+
+  --border-subtle: rgba(16, 185, 129, 0.14);
+  --border-medium: rgba(16, 185, 129, 0.28);
+  --border-strong: rgba(16, 185, 129, 0.55);
+
+  --text-pure: #ffffff;
+  --text-primary: #e6f4ee;
+  --text-secondary: #94b8a7;
+  --text-tertiary: #5d7e6f;
+
+  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --font-arabic: 'Cairo', sans-serif;
+
+  --topbar-height: 52px;
+  --sidebar-width: 250px;
+  --terminal-height: 220px;
+}

@@ -1,0 +1,9 @@
+{
+  "name": "QuantumFlow HFT Microstructure",
+  "short_name": "QuantumFlow",
+  "description": "High-Frequency Limit Order Book, Hawkes Process Self-Exciting Cascades & Quantum Walk Diffuser",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#020403",
+  "theme_color": "#020403"
+}

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuantumFlow HFT Microstructure | Level-3 Limit Order Book Workstation</title>
+  <meta name="description" content="High-Frequency Limit Order Book, Hawkes Process Self-Exciting Cascades & Quantum Walk Diffuser">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#020403">
+
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/cyber-hft.css">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2308110c'/><path d='M20 70 L45 30 L60 55 L80 20' fill='none' stroke='%2300ff88' stroke-width='8'/><circle cx='80' cy='20' r='10' fill='%23fb7185'/></svg>">
+</head>
+<body>
+  <div class="scanlines-overlay"></div>
+
+  <div id="app-root">
+    
+    <!-- Topbar Header -->
+    <header class="topbar">
+      <div class="brand-section">
+        <div class="brand-logo-icon">QF</div>
+        <div class="brand-meta">
+          <div class="brand-title">
+            QuantumFlow HFT <span class="brand-version-badge">v4.0-SUBMICRO</span>
+          </div>
+          <div class="brand-tagline">Level-3 Order Book & Hawkes Microstructure Engine</div>
+        </div>
+      </div>
+
+      <!-- Telemetry Strip -->
+      <div class="telemetry-strip">
+        <div class="telemetry-item">
+          <span class="pulse-dot"></span>
+          <span style="color: var(--text-tertiary);">Match Engine:</span>
+          <span style="color: var(--bid-green); font-weight: 700;">680ns [LOCK-FREE]</span>
+        </div>
+        <div class="telemetry-item">
+          <span style="color: var(--text-tertiary);">Throughput:</span>
+          <span style="color: var(--cyan-400);">1.48M Orders/s</span>
+        </div>
+        <div class="telemetry-item">
+          <span style="color: var(--text-tertiary);">Feed:</span>
+          <span style="color: var(--emerald-400);">ITCH/OUCH Level-3</span>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 8px;">
+        <button class="btn btn-emerald" id="btn-quick-buy">+1.0 BUY Taker</button>
+        <button class="btn btn-coral" id="btn-quick-sell">-1.0 SELL Taker</button>
+        <button class="btn btn-outline" id="btn-lang-toggle">عربي</button>
+        <button class="btn btn-cyan" id="btn-toggle-terminal">Quant CLI</button>
+      </div>
+    </header>
+
+    <!-- Workstation Body -->
+    <div class="workstation-body">
+      
+      <!-- Primary Sidebar -->
+      <aside class="primary-sidebar">
+        <div>
+          <div class="nav-section-title">Terminal Views</div>
+          <ul class="nav-list">
+            <li>
+              <button class="nav-item-btn active" data-view="view-dom">
+                <span>📶</span>
+                <span>Depth of Market (DOM)</span>
+                <span class="nav-badge">L3 Feed</span>
+              </button>
+            </li>
+            <li>
+              <button class="nav-item-btn" data-view="view-surface">
+                <span>🌊</span>
+                <span>3D Liquidity Surface</span>
+                <span class="nav-badge">Heatmap</span>
+              </button>
+            </li>
+            <li>
+              <button class="nav-item-btn" data-view="view-quantum">
+                <span>⚛</span>
+                <span>Quantum Walk Waves</span>
+                <span class="nav-badge">Hadamard</span>
+              </button>
+            </li>
+            <li>
+              <button class="nav-item-btn" data-view="view-hawkes">
+                <span>💥</span>
+                <span>Hawkes Cascades & VPIN</span>
+                <span class="nav-badge">Toxicity</span>
+              </button>
+            </li>
+          </ul>
+
+          <div class="nav-section-title" style="margin-top: 14px;">Active Contract</div>
+          <div style="padding: 0 12px;">
+            <select style="width: 100%; background: var(--bg-surface); color: var(--bid-green); border: 1px solid var(--border-medium); border-radius: 4px; padding: 7px; font-family: var(--font-mono); font-size: 11px; outline: none;">
+              <option>BTC-PERP (CME Microsecond Tick)</option>
+              <option>ETH-PERP (Arbitrage Spread)</option>
+              <option>SOL-PERP (High-Frequency Order Flow)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="sidebar-footer-box">
+          <div style="font-size: 10.5px; color: var(--text-tertiary); margin-bottom: 4px;">Engine Priority:</div>
+          <div style="font-size: 11px; color: var(--bid-green); font-weight: 700;">Price-Time FIFO Strict</div>
+          <div style="font-size: 10px; color: var(--text-secondary); margin-top: 4px;">
+            Pre-allocated contiguous buffers. Zero garbage collection jitter.
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Viewport -->
+      <main class="viewport-stage">
+        
+        <!-- View 1: Depth of Market (DOM) -->
+        <section id="view-dom" class="view-container active">
+          <!-- Top HUD Tiles -->
+          <div class="hud-metrics-grid">
+            <div class="hud-tile">
+              <span class="hud-tile-label">Weighted Mid Price</span>
+              <span class="hud-tile-val" id="stat-mid-price" style="color: var(--cyan-400);">$64,250.00</span>
+              <span style="font-size: 10.5px; color: var(--text-emerald);">Tick Size: $0.50</span>
+            </div>
+            <div class="hud-tile">
+              <span class="hud-tile-label">Bid-Ask Spread</span>
+              <span class="hud-tile-val" id="stat-spread" style="color: var(--text-pure);">$1.00</span>
+              <span style="font-size: 10.5px; color: var(--bid-green);">Tight Liquidity Corridor</span>
+            </div>
+            <div class="hud-tile">
+              <span class="hud-tile-label">Order Book Imbalance (OBI)</span>
+              <span class="hud-tile-val" id="stat-obi" style="color: var(--bid-green);">+14.2%</span>
+              <span style="font-size: 10.5px; color: var(--text-secondary);">Top 5 Levels Volume Bias</span>
+            </div>
+            <div class="hud-tile">
+              <span class="hud-tile-label">VPIN Flow Toxicity</span>
+              <span class="hud-tile-val" id="stat-vpin" style="color: var(--emerald-400);">21.8%</span>
+              <span style="font-size: 10.5px; color: var(--text-secondary);">Adverse Selection Safe</span>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
+            <!-- Depth Ladder -->
+            <div class="cyber-card">
+              <div class="card-header-row">
+                <h3 class="card-title">DEPTH OF MARKET (DOM) 24-LEVEL ORDER LADDER</h3>
+                <span class="nav-badge">60 FPS LIVE</span>
+              </div>
+              <div style="max-height: 400px; overflow-y: auto;">
+                <table class="dom-ladder-container">
+                  <thead>
+                    <tr>
+                      <th>Price</th>
+                      <th style="text-align: right;">Size (BTC)</th>
+                      <th style="width: 140px;">Volume Depth Profile</th>
+                      <th>Order Type</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dom-ladder-body"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Trade Tape -->
+            <div class="cyber-card">
+              <div class="card-header-row">
+                <h3 class="card-title">MICROSECOND TRADE TAPE</h3>
+                <span class="nav-badge">SUB-MS</span>
+              </div>
+              <div id="trade-tape-body" style="display: flex; flex-direction: column; gap: 4px; max-height: 380px; overflow-y: auto;"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- View 2: 3D Liquidity Heat Surface -->
+        <section id="view-surface" class="view-container">
+          <div class="cyber-card" style="flex: 1; min-height: 520px; display: flex; flex-direction: column;">
+            <div class="card-header-row">
+              <h3 class="card-title">3D LIQUIDITY DENSITY HEATMAP SURFACE (ORDER BOOK EVOLUTION)</h3>
+              <span class="nav-badge">CONTINUOUS TIME</span>
+            </div>
+            <div class="canvas-holder" style="flex: 1; min-height: 460px;">
+              <canvas id="canvas-surface" style="width: 100%; height: 100%;"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- View 3: Quantum Walk Waves -->
+        <section id="view-quantum" class="view-container">
+          <div class="cyber-card" style="flex: 1; min-height: 520px; display: flex; flex-direction: column;">
+            <div class="card-header-row">
+              <h3 class="card-title">QUANTUM RANDOM WALK PRICE DIFFUSION (HADAMARD OPERATOR)</h3>
+              <span class="nav-badge">BALLISTIC DISPERSION</span>
+            </div>
+            <div class="canvas-holder" style="flex: 1; min-height: 460px;">
+              <canvas id="canvas-quantum" style="width: 100%; height: 100%;"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- View 4: Hawkes Cascades & VPIN -->
+        <section id="view-hawkes" class="view-container">
+          <div class="cyber-card">
+            <div class="card-header-row">
+              <h3 class="card-title">MULTIVARIATE SELF-EXCITING HAWKES INTENSITIES</h3>
+              <span class="nav-badge">BRANCHING RATIO η</span>
+            </div>
+            <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); line-height: 1.8;">
+              <p>Self-Exciting Model Formulation: <span style="color: var(--cyan-400);">λ_i(t) = μ_i + Σ α_ij exp(-β_ij (t - t_k))</span></p>
+              <p>Branching Ratio: <span style="color: var(--bid-green);">η = α / β = 3.2 / 4.8 = 0.667</span> (Subcritical Stability: System absorbs shocks without unbounded liquidity cascade)</p>
+              <p>Critical Shock Threshold: <span style="color: var(--ask-coral);">η ≥ 1.000</span> (Supercritical Avalanche / Flash Crash Risk)</p>
+              <p>VPIN Metric: <span style="color: var(--amber-400);">Volume-Synchronized Probability of Toxicity</span> monitors informed trader arrival to prevent front-running.</p>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+
+    <!-- Bottom CLI Drawer -->
+    <footer class="terminal-drawer" id="terminal-drawer">
+      <div class="terminal-bar">
+        <div class="terminal-tabs">
+          <button class="terminal-tab-btn active">REPL QUANT CLI</button>
+          <button class="terminal-tab-btn">ITCH PACKET CAPTURE</button>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--bid-green);">● SUB-MICROSECOND ENGINE ACTIVE</span>
+          <button class="btn btn-outline" style="padding: 2px 8px; font-size: 10px;" onclick="document.getElementById('terminal-drawer').classList.toggle('minimized')">▼</button>
+        </div>
+      </div>
+      <div class="terminal-body" id="terminal-logs-body"></div>
+      <div style="background: var(--bg-surface); padding: 4px 16px 8px; border-top: 1px solid var(--border-subtle);">
+        <div class="terminal-prompt-line">
+          <span class="prompt-prefix">hft:quant&gt;</span>
+          <input type="text" id="terminal-cli-input" class="terminal-input" placeholder="Type 'help', 'market BUY 1.0', 'hawkes', 'vpin', 'benchmark'..." autocomplete="off">
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="scripts/lob-engine.js"></script>
+  <script src="scripts/hawkes-process.js"></script>
+  <script src="scripts/quantum-diffuser.js"></script>
+  <script src="scripts/canvas-hft.js"></script>
+  <script src="scripts/terminal-cli.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+</html>
